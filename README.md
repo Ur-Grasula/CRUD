@@ -1,2 +1,2 @@
 # CRUD
-Sistema CRUD.
+Sistema CRUD Laravel.
