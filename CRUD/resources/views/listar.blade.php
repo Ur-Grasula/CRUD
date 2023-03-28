@@ -1,8 +1,8 @@
 @extends('layouts.main_layout')
-@section('titulo', 'Home')
+@section('titulo', 'Listar')
+@section('pagina', 'LISTAR')
 @section('conteudo')
     <div class="container">
-        <h1>Listagem</h1>
         <hr>
         <div class="container">
             @if ($registro > 0)
@@ -19,6 +19,8 @@
                             <th scope="col">Senha</th>
                             <th scope="col">Criado</th>
                             <th scope="col">Atualizado</th>
+                            <th scope="col">Alterar dados</th>
+                            <th scope="col">Excluir dados</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +32,20 @@
                                 <td>{{ $usuario->senha }}</td>
                                 <td>{{ $usuario->created_at }}</td>
                                 <td>{{ $usuario->updated_at }}</td>
+                                <td>
+                                    <form action="{{ Route('alterar',[$usuario->id]) }}" method="get">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $usuario->id }}">
+                                        <input class="btn btn-primary" type="submit" value="Alterar">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{Route('deletar',[$usuario->id])}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $usuario->id }}">
+                                        <input class="btn btn-primary" type="submit" value="Excluir">
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -1,8 +1,8 @@
 @extends('layouts.main_layout')
 @section('titulo','Home')
+@section('pagina','HOME')
 @section('conteudo')
     <div class="container">
-        <h1>HOME</h1>
         <hr>
     </div>
 @endsection

@@ -14,12 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// ROTA PRINCIPAL =============================================================================
+// ROTA PRINCIPAL
 Route::get('/', [Main_Controller::class, 'Index'])->name('home');
 
-// ROTAS DE CADASTRO DE USUARIO ===============================================================
-Route::get('/Cadastrar', [Main_Controller::class, 'Cadastrar'])->name('cadastro');
-Route::post('/Cadastrar_Submissao', [Main_Controller::class, 'Cadastrar_Submissao'])->name('cadastrar_submissao');
+// ROTAS DE CADASTRO DE USUARIO
+Route::get('/Cadastrar', [Main_Controller::class, 'Cadastrar'])->name('cadastrar');
+Route::match(['post', 'get'], '/Cadastrar_Submissao', [Main_Controller::class, 'Cadastrar_Submissao'])->name('cadastrar_submissao');
 
-// ROTA DE LISTAGEM ===========================================================================
-Route::get('/Listagem',[Main_Controller::class,'Listagem'])->name('listagem');
+// ROTA DE LISTAGEM
+Route::get('/Listar', [Main_Controller::class, 'Listar'])->name('listar');
+
+// ROTAS DE ALTERAÇÂO
+Route::get('/Alterar/{id}', [Main_Controller::class, 'Alterar'])->name('alterar');
+Route::match(['post', 'get'], '/Alterar_Submissao', [Main_Controller::class, 'Alterar_Submissao'])->name('alterar_submissao');
+
+// ROTA DE DELETAR
+Route::match(['get','post'],'/Deletar/{id}', [Main_Controller::class, 'Deletar'])->name('deletar');
