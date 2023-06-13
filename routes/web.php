@@ -15,18 +15,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 // ROTA PRINCIPAL
-Route::get('/', [Main_Controller::class, 'Index'])->name('home');
-
-// ROTAS DE CADASTRO DE USUARIO
-Route::get('/Cadastrar', [Main_Controller::class, 'Cadastrar'])->name('cadastrar');
-Route::match(['post', 'get'], '/Cadastrar_Submissao', [Main_Controller::class, 'Cadastrar_Submissao'])->name('cadastrar_submissao');
+Route::get('/', function () {
+    return redirect()->route('usuario_listar');
+})->name('home');
 
 // ROTA DE LISTAGEM
-Route::get('/Listar', [Main_Controller::class, 'Listar'])->name('listar');
+Route::get('/Listar', [Main_Controller::class, 'View_Usuario_Listar'])->name('usuario_listar');
+
+// ROTA DE BUSCA
+Route::match(['post', 'get'],'/Buscar/{usuario?}', [Main_Controller::class, 'View_Usuario_Buscar'])->name('usuario_buscar');
+
+// ROTA DE CADASTRO DE USUARIO
+Route::match(['post', 'get'], '/Cadastrar_Validation', [Main_Controller::class, 'View_Usuario_Cadastrar_Validate'])->name('usuario_cadastrar_validate');
+
 
 // ROTAS DE ALTERAÇÂO
-Route::get('/Alterar/{id}', [Main_Controller::class, 'Alterar'])->name('alterar');
-Route::match(['post', 'get'], '/Alterar_Submissao', [Main_Controller::class, 'Alterar_Submissao'])->name('alterar_submissao');
+Route::match(['post', 'get'], '/Alterar/{id}', [Main_Controller::class, 'View_usuario_Alterar'])->name('usuario_alterar');
+Route::match(['post', 'get'], '/Alterar_Validation/{id}', [Main_Controller::class, 'View_usuari_Alterar_Validate'])->name('usuario_alterar_validate');
 
 // ROTA DE DELETAR
-Route::match(['get','post'],'/Deletar/{id}', [Main_Controller::class, 'Deletar'])->name('deletar');
+Route::match(['get', 'post'], '/Deletar/{id}', [Main_Controller::class, 'View_Usuario_Deletar'])->name('usuario_deletar');
